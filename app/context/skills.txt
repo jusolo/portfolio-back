@@ -1,0 +1,55 @@
+Resumen de habilidades técnicas de Juan Sebastián Ospina Losada
+
+Perfil general
+- Ingeniero de software con enfoque en diseño de software y desarrollo web.
+- Interés en soluciones claras, eficientes y escalables, cuidando usabilidad y buenas prácticas.
+
+TypeScript
+- Nivel: avanzado.
+- Uso: bases de frontends en React y Angular; tipado estricto, generics y utilidades de tipos.
+- Prácticas: tsconfig con strict mode, ESLint, separación de tipos/domínio, DTOs.
+
+React
+- Nivel: intermedio-avanzado.
+- Uso: componentes con hooks y context, formularios, enrutamiento con Vite, integración con Tailwind/shadcn.
+- Prácticas: composición por props, memoización cuando aporta, code-splitting y carga diferida.
+
+Angular
+- Nivel: avanzado.
+- Uso: componentes standalone, servicios, interceptores, guards y routing.
+- Prácticas: módulos racionales cuando aplican, HttpClient, manejo de estados simples en componente, RxJS para flujos.
+
+NestJS
+- Nivel: intermedio-avanzado.
+- Uso: controladores, servicios, guards (JWT), pipes e interceptores; documentación con Swagger.
+- Persistencia: integración común con PostgreSQL (TypeORM o Prisma).
+- Prácticas: validación con class-validator, DTOs, manejo de errores consistente.
+
+FastAPI
+- Nivel: intermedio.
+- Uso: endpoints async, Pydantic para validación, CORS, BackgroundTasks, logging.
+- Prácticas: separación de capas (routers, schemas, services), respuestas tipadas.
+
+TailwindCSS
+- Nivel: avanzado.
+- Uso: maquetación responsiva rápida, dark mode por clase, utilidades para estados.
+- Integración: trabajo cómodo con shadcn/ui y Vite.
+
+JWT
+- Nivel: intermedio.
+- Uso: autenticación en APIs (access/refresh cuando es requerido), guards/interceptores en cliente y servidor.
+- Prácticas: expiración corta para access token, refresh seguro, revocación por servidor cuando aplica.
+
+PostgreSQL
+- Nivel: intermedio.
+- Uso: modelado relacional, claves foráneas, índices básicos, consultas comunes.
+- Integración: TypeORM/NestJS o drivers/ORM equivalentes; migraciones controladas.
+
+Foco de calidad
+- Buenas prácticas de código, legibilidad, manejo de errores, validación de entrada/salida.
+- Preferencia por patrones simples y mantenibles sobre complejidades innecesarias.
+
+Áreas de interés
+- Frontend moderno (React/Angular) con TypeScript.
+- Backends API con NestJS/FastAPI, autenticación con JWT.
+- Integración de pagos, almacenamiento de medios y despliegue en VPS.

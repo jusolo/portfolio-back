@@ -1,0 +1,32 @@
+---
+time: 2025-08-28T19:00:34-05:00
+question: Hola, dime quien es Sebastian ospina
+answer: Juan Sebastián Ospina Losada es un ingeniero de software colombiano de 24 años, especializado en diseño y desarrollo web, enfocado en soluciones digitales funcionales y eficientes.
+---
+time: 2025-08-28T19:01:41-05:00
+question: que proyectos ha hecho?
+answer: El contexto solo menciona que tiene experiencia en diseño de software y desarrollo web, enfocándose en soluciones digitales claras, funcionales y eficientes.  No especifica qué proyectos concretos ha realizado.
+---
+time: 2025-08-28T19:06:17-05:00
+question: que habilidades tiene?
+answer: Es ingeniero de software con experiencia en diseño de software y desarrollo web.  Tiene habilidades avanzadas en TypeScript, Angular y TailwindCSS;  intermedio-avanzado en React, NestJS y JWT; e intermedio en FastAPI y PostgreSQL.  Se enfoca en soluciones claras, eficientes y escalables, con buena usabilidad y prácticas de programación.  También destaca su interés en crear entornos digitales de fácil interacción y resolución de problemas.
+---
+time: 2025-08-28T19:13:42-05:00
+question: hola
+answer: Hola! ¿En qué te puedo ayudar?
+---
+time: 2025-08-28T19:13:50-05:00
+question: dime quien es Sebastian ospina
+answer: Juan Sebastián Ospina Losada es un ingeniero de software colombiano de 24 años con experiencia en diseño de software y desarrollo web.  Se enfoca en soluciones digitales claras, funcionales y eficientes.
+---
+time: 2025-08-28T19:14:04-05:00
+question: que habilidades tiene?
+answer: Es ingeniero de software con experiencia en diseño de software y desarrollo web.  Sus habilidades técnicas incluyen TypeScript, React, Angular, NestJS, FastAPI, TailwindCSS, JWT y PostgreSQL, con diferentes niveles de dominio en cada una.  Además, se enfoca en buenas prácticas de programación,  legibilidad del código y soluciones escalables y fáciles de usar.
+---
+time: 2025-08-28T19:14:19-05:00
+question: como puedo contactarlo?
+answer: Puedes contactarlo por correo electrónico a jolosada1@gmail.com.  Él prefiere este medio de contacto.
+---
+time: 2025-08-28T19:19:23-05:00
+question: hola
+answer: Hola! ¿En qué te puedo ayudar?

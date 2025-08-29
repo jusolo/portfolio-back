@@ -1,0 +1,17 @@
+# Framework web
+fastapi==0.115.0
+uvicorn[standard]==0.30.5
+
+# Asíncronos
+aiofiles==24.1.0
+
+# Validaciones
+pydantic==2.9.2
+
+# Zona horaria
+tzdata==2024.1
+
+# Cliente oficial de Gemini (genai)
+google-genai==0.3.0
+
+python-dotenv==1.0.1
