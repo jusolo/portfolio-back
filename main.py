@@ -24,7 +24,7 @@ LOGGER_PATH = Path(os.environ.get("LOGGER_PATH", "logs/logger.txt"))
 CORS_ORIGINS = os.getenv("CORS_ALLOW_ORIGINS", "*").split(",")
 BOGOTA_TZ = ZoneInfo("America/Bogota")
 
-app = FastAPI(title="UNP Chat API", root_path=ROOT_PATH)
+app = FastAPI(title="sebastian ospina API", root_path=ROOT_PATH)
 
 app.add_middleware(
     CORSMiddleware,
