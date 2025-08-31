@@ -12,6 +12,7 @@ POOL = AsyncConnectionPool(
     min_size=0,                 # no abras conexiones hasta la primera query
     max_size=int(os.getenv("PGPOOL_MAX_SIZE", "5")),
     timeout=8                   # tiempo máx para conseguir conexión del pool
+    kwargs={"prepare_threshold": None},
 )
 
 async def open_pool():

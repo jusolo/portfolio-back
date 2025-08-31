@@ -96,7 +96,7 @@ def _sim_float(similarity: float | int) -> float:
 
 async def get_fuzzy(question: str, similarity: float | int = 0.92, max_age_days: Optional[int] = None) -> Optional[Dict[str, Any]]:
     n = normalize(question)
-    s = _sim_float(similarity)
+    s = _sim_float(similarity)  # acepta "92" o 0.92
 
     where = ["similarity(question_norm, %s) >= %s"]
     params: List[Any] = [n, s]
@@ -105,6 +105,7 @@ async def get_fuzzy(question: str, similarity: float | int = 0.92, max_age_days:
         where.append("created_at >= now() - (%s || ' days')::interval")
         params.append(str(max_age_days))
 
+    # OJO: n aparece dos veces: en SELECT y en WHERE
     sql = f"""
       SELECT *, similarity(question_norm, %s) AS sim
       FROM qa_cache
@@ -113,9 +114,12 @@ async def get_fuzzy(question: str, similarity: float | int = 0.92, max_age_days:
       LIMIT 1
     """
 
+    # Inserta n al principio para el SELECT
+    exec_params = [n, *params]
+
     async with POOL.connection() as conn:
         async with conn.cursor(row_factory=dict_row) as cur:
-            await cur.execute(sql, params)
+            await cur.execute(sql, exec_params)
             row = await cur.fetchone()
             if not row:
                 return None
