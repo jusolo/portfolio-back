@@ -1,13 +1,26 @@
-Resumen de habilidades técnicas de Juan Sebastián Ospina Losada
+ID: juan_ospina_skills_v1
+Título: Resumen de habilidades técnicas de Juan Sebastián Ospina Losada
+
+Propósito
+- Proveer un resumen claro y verificable de mis habilidades técnicas actuales.
+- Servir como base de respuesta breve (1–3 frases) cuando el usuario pregunte por mi stack, nivel o prácticas.
+- Si algo no está descrito aquí, responder: "No tengo esa información en el contexto disponible."
+
+Estilo
+- Tono profesional, directo y conciso.
+- Evitar jerga innecesaria y promesas vagas.
+- Priorizar ejemplos y prácticas concretas.
 
 Perfil general
 - Ingeniero de software con enfoque en diseño de software y desarrollo web.
 - Interés en soluciones claras, eficientes y escalables, cuidando usabilidad y buenas prácticas.
 
+Competencias por tecnología
+
 TypeScript
 - Nivel: avanzado.
-- Uso: bases de frontends en React y Angular; tipado estricto, generics y utilidades de tipos.
-- Prácticas: tsconfig con strict mode, ESLint, separación de tipos/domínio, DTOs.
+- Uso: base de frontends en React y Angular; tipado estricto, generics y utilidades de tipos.
+- Prácticas: tsconfig en strict mode, ESLint, separación de tipos de dominio y DTOs.
 
 React
 - Nivel: intermedio-avanzado.
@@ -17,18 +30,18 @@ React
 Angular
 - Nivel: avanzado.
 - Uso: componentes standalone, servicios, interceptores, guards y routing.
-- Prácticas: módulos racionales cuando aplican, HttpClient, manejo de estados simples en componente, RxJS para flujos.
+- Prácticas: módulos racionales cuando aplican, HttpClient, manejo de estado simple en componente, RxJS para flujos.
 
 NestJS
 - Nivel: intermedio-avanzado.
 - Uso: controladores, servicios, guards (JWT), pipes e interceptores; documentación con Swagger.
 - Persistencia: integración común con PostgreSQL (TypeORM o Prisma).
-- Prácticas: validación con class-validator, DTOs, manejo de errores consistente.
+- Prácticas: validación con class-validator, DTOs y manejo de errores consistente.
 
 FastAPI
 - Nivel: intermedio.
 - Uso: endpoints async, Pydantic para validación, CORS, BackgroundTasks, logging.
-- Prácticas: separación de capas (routers, schemas, services), respuestas tipadas.
+- Prácticas: separación de capas (routers, schemas, services) y respuestas tipadas.
 
 TailwindCSS
 - Nivel: avanzado.
@@ -37,19 +50,27 @@ TailwindCSS
 
 JWT
 - Nivel: intermedio.
-- Uso: autenticación en APIs (access/refresh cuando es requerido), guards/interceptores en cliente y servidor.
-- Prácticas: expiración corta para access token, refresh seguro, revocación por servidor cuando aplica.
+- Uso: autenticación en APIs (access/refresh cuando se requiere), guards/interceptores en cliente y servidor.
+- Prácticas: expiración corta para access token, refresh seguro y revocación en servidor cuando aplica.
 
 PostgreSQL
 - Nivel: intermedio.
-- Uso: modelado relacional, claves foráneas, índices básicos, consultas comunes.
+- Uso: modelado relacional, claves foráneas, índices básicos y consultas comunes.
 - Integración: TypeORM/NestJS o drivers/ORM equivalentes; migraciones controladas.
 
 Foco de calidad
-- Buenas prácticas de código, legibilidad, manejo de errores, validación de entrada/salida.
+- Buenas prácticas de código, legibilidad, manejo de errores y validación de entrada/salida.
 - Preferencia por patrones simples y mantenibles sobre complejidades innecesarias.
 
 Áreas de interés
 - Frontend moderno (React/Angular) con TypeScript.
-- Backends API con NestJS/FastAPI, autenticación con JWT.
-- Integración de pagos, almacenamiento de medios y despliegue en VPS.
+- Backends API con NestJS/FastAPI y autenticación con JWT.
+- Integraciones (pagos, medios) y despliegue en VPS.
+
+Guías de respuesta (plantillas breves)
+- "Mi nivel en <tecnología> es <nivel>; suelo usarlo para <uso> y aplico <prácticas clave>."
+- "Para proyectos <tipo>, prefiero <stack> por <razón breve>."
+- "Si necesitas más detalles de implementación, no los tengo en el contexto disponible."
+
+Notas
+- Este archivo se puede ampliar con proyectos, métricas y ejemplos de código cuando correspondan.

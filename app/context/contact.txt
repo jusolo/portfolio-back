@@ -1,9 +1,24 @@
-Información de contacto de Juan Sebastián Ospina Losada
+ID: juan_ospina_contact_v1
+Título: Información de contacto de Juan Sebastián Ospina Losada
 
+Propósito
+- Centralizar mis datos de contacto para respuestas breves y consistentes.
+- Si se solicita un medio no listado, responder: "No tengo ese medio de contacto en el contexto disponible."
+
+Estilo
+- Tono directo y cortés.
+- Respuestas de 1 frase cuando sea posible.
+
+Datos de contacto
 - Correo electrónico: jolosada1@gmail.com
 - Canal preferido: correo electrónico
 - Zona horaria de referencia: America/Bogota (UTC-5)
 - Idioma de atención: español
 
-Notas:
-- Si se solicita otro medio de contacto, no está disponible en el contexto.
+Guías de respuesta (plantillas)
+- "Puedes escribirme a jolosada1@gmail.com."
+- "Mi canal preferido es el correo electrónico."
+- "Trabajo con zona horaria America/Bogota (UTC-5)."
+
+Límites
+- No se encuentran disponibles otros medios de contacto en este contexto.
