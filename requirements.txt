@@ -16,5 +16,5 @@ google-genai==0.3.0
 
 python-dotenv==1.0.1
 rapidfuzz==3.9.7
-psycopg[binary,pool]==3.2.1
+psycopg[binary,pool]>=3.2.2,<3.3
 
