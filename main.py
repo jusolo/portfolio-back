@@ -10,7 +10,7 @@ from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 
 from app.ia import ask_ai
-from app.storage import qa_cache
+from app.storage import qa_cache_pg as qa_cache
 from app.storage.pg import open_pool, close_pool
 from app.storage.qa_log_pg import init_db as init_logs_db, log_qa
 
