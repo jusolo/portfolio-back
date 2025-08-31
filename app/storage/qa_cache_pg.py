@@ -1,8 +1,11 @@
-import os, hashlib, json, re, unicodedata
-from datetime import timedelta
+# app/storage/qa_cache_pg.py
+import hashlib
+import json
+import re
+import unicodedata
 from typing import Optional, Dict, Any, List
 from psycopg.rows import dict_row
-from .pg import POOL  # usa el AsyncConnectionPool que ya creaste
+from .pg import POOL  # AsyncConnectionPool configurado en app/storage/pg.py
 
 # ----------------- normalización y hash -----------------
 _norm_ws = re.compile(r"\s+")
@@ -35,8 +38,8 @@ CREATE TABLE IF NOT EXISTS qa_cache (
   meta JSONB
 );
 
-CREATE INDEX IF NOT EXISTS idx_qa_created ON qa_cache(created_at DESC);
-CREATE INDEX IF NOT EXISTS idx_qa_norm_trgm ON qa_cache USING GIN (question_norm gin_trgm_ops);
+CREATE INDEX IF NOT EXISTS idx_qa_created     ON qa_cache(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_qa_norm_trgm   ON qa_cache USING GIN (question_norm gin_trgm_ops);
 """
 
 async def init_db() -> None:
@@ -48,33 +51,34 @@ async def init_db() -> None:
 async def get_exact(question: str, max_age_days: Optional[int] = None) -> Optional[Dict[str, Any]]:
     n = normalize(question)
     h = qhash(n)
-    age_clause = "AND created_at >= now() - ($2 || ' days')::interval" if max_age_days is not None else ""
-    params = (h,) if max_age_days is None else (h, str(max_age_days))
+
+    base_sql = "SELECT * FROM qa_cache WHERE qhash=%s"
+    params: List[Any] = [h]
+
+    if max_age_days is not None:
+        base_sql += " AND created_at >= now() - (%s || ' days')::interval"
+        params.append(str(max_age_days))
+
     async with POOL.connection() as conn:
         async with conn.cursor(row_factory=dict_row) as cur:
-            await cur.execute(
-                f"SELECT * FROM qa_cache WHERE qhash=$1 {age_clause}",
-                params,
-            )
+            await cur.execute(base_sql, params)
             row = await cur.fetchone()
             if not row:
                 return None
-            await cur.execute(
-                "UPDATE qa_cache SET hits=hits+1, last_used_at=now() WHERE qhash=$1",
-                (h,),
-            )
+            await cur.execute("UPDATE qa_cache SET hits=hits+1, last_used_at=now() WHERE qhash=%s", (h,))
             return dict(row)
 
 async def put(question: str, answer: str, model: Optional[str] = None, meta: Optional[Dict[str, Any]] = None) -> None:
     n = normalize(question)
     h = qhash(n)
     meta_json = json.dumps(meta or {}, ensure_ascii=False)
+
     async with POOL.connection() as conn:
         async with conn.cursor() as cur:
             await cur.execute(
                 """
                 INSERT INTO qa_cache (qhash, question_norm, question_original, answer, model, meta)
-                VALUES ($1, $2, $3, $4, $5, $6)
+                VALUES (%s, %s, %s, %s, %s, %s)
                 ON CONFLICT (qhash) DO UPDATE SET
                   last_used_at = now(),
                   hits = qa_cache.hits + 1
@@ -88,51 +92,50 @@ def _sim_float(similarity: float | int) -> float:
         s = float(similarity)
     except Exception:
         return 0.92
-    return s/100.0 if s > 1.0 else s
+    return s / 100.0 if s > 1.0 else s
 
 async def get_fuzzy(question: str, similarity: float | int = 0.92, max_age_days: Optional[int] = None) -> Optional[Dict[str, Any]]:
     n = normalize(question)
     s = _sim_float(similarity)
-    clauses = ["similarity(question_norm, $1) >= $2"]
+
+    where = ["similarity(question_norm, %s) >= %s"]
     params: List[Any] = [n, s]
+
     if max_age_days is not None:
-        clauses.append("created_at >= now() - ($3 || ' days')::interval")
+        where.append("created_at >= now() - (%s || ' days')::interval")
         params.append(str(max_age_days))
-    where = " AND ".join(clauses)
+
     sql = f"""
-      SELECT *, similarity(question_norm, $1) AS sim
+      SELECT *, similarity(question_norm, %s) AS sim
       FROM qa_cache
-      WHERE {where}
+      WHERE {" AND ".join(where)}
       ORDER BY sim DESC, last_used_at DESC
       LIMIT 1
     """
+
     async with POOL.connection() as conn:
         async with conn.cursor(row_factory=dict_row) as cur:
             await cur.execute(sql, params)
             row = await cur.fetchone()
             if not row:
                 return None
-            await cur.execute(
-                "UPDATE qa_cache SET hits=hits+1, last_used_at=now() WHERE qhash=$1",
-                (row["qhash"],),
-            )
+            await cur.execute("UPDATE qa_cache SET hits=hits+1, last_used_at=now() WHERE qhash=%s", (row["qhash"],))
             return dict(row)
 
 async def search(term: str, limit: int = 20) -> List[Dict[str, Any]]:
     n = normalize(term)
     async with POOL.connection() as conn:
         async with conn.cursor(row_factory=dict_row) as cur:
-            # ordena por similitud y uso reciente
             await cur.execute(
                 """
                 SELECT question_original, answer, hits, last_used_at,
-                       similarity(question_norm, $1) AS sim
+                       similarity(question_norm, %s) AS sim
                 FROM qa_cache
-                WHERE similarity(question_norm, $1) >= 0.3
+                WHERE similarity(question_norm, %s) >= 0.3
                 ORDER BY sim DESC, last_used_at DESC
-                LIMIT $2
+                LIMIT %s
                 """,
-                (n, limit),
+                (n, n, limit),
             )
             rows = await cur.fetchall()
             return [dict(r) for r in rows]
@@ -142,5 +145,5 @@ async def invalidate(question: str) -> int:
     h = qhash(n)
     async with POOL.connection() as conn:
         async with conn.cursor() as cur:
-            await cur.execute("DELETE FROM qa_cache WHERE qhash=$1", (h,))
+            await cur.execute("DELETE FROM qa_cache WHERE qhash=%s", (h,))
             return cur.rowcount or 0
