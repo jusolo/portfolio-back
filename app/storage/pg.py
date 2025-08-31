@@ -13,3 +13,9 @@ POOL = AsyncConnectionPool(
     max_size=int(os.getenv("PGPOOL_MAX_SIZE", "5")),
     timeout=8                   # tiempo máx para conseguir conexión del pool
 )
+
+async def open_pool():
+    await POOL.open()
+
+async def close_pool():
+    await POOL.close()
