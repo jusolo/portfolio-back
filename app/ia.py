@@ -96,7 +96,7 @@ async def ask_ai(user_text: str) -> str:
     # intento con API nueva
     try:
         resp = client.responses.generate(
-            model=os.getenv("GENAI_MODEL", "gemini-2.5-flash"),
+            model=os.getenv("GENAI_MODEL", "gemini-1.5-flash"),
             input=prompt,
         )
         if hasattr(resp, "output_text") and resp.output_text:
@@ -107,7 +107,7 @@ async def ask_ai(user_text: str) -> str:
     # fallback API vieja
     try:
         resp = client.models.generate_content(
-            model=os.getenv("GENAI_MODEL", "gemini-2.5-flash"),
+            model=os.getenv("GENAI_MODEL", "gemini-1.5-flash"),
             contents=prompt,
         )
         text = getattr(resp, "text", None) or str(resp)
